@@ -2,7 +2,7 @@ name: Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]        # 你的默认分支
   workflow_dispatch:
 
 permissions:
@@ -19,11 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: treasure-game-2024    # 👈 子目录里执行
+        working-directory: treasure-game-2024   # 👈 在子目录内执行所有 run
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          submodules: recursive
+          fetch-depth: 1                        # 不启用 submodules，避免 .gitmodules 报错
 
       - name: Use Node.js 20
         uses: actions/setup-node@v4
@@ -32,7 +33,13 @@ jobs:
           cache: npm
           cache-dependency-path: treasure-game-2024/package-lock.json
 
-      - name: Install Dependencies
+      # 如果主题不在仓库内，这里在 CI 中临时拉取主题
+      - name: Fetch Hexo theme (butterfly)
+        run: |
+          mkdir -p themes
+          git clone --depth=1 https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
+
+      - name: Install dependencies
         run: npm ci
 
       - name: Build (Hexo)
@@ -46,7 +53,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: treasure-game-2024/public       # 👈 从子目录上传
+          path: treasure-game-2024/public       # 👈 从子目录上传构建产物
 
   deploy:
     needs: build
@@ -55,5 +62,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
