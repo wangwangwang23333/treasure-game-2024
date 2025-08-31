@@ -1,0 +1,155 @@
+/* 默认隐藏图片 */
+.img-dark-mode {
+    display: none !important;
+}
+
+
+
+[data-theme='dark'] .img-dark-mode {
+    display: block !important;
+}
+
+/* 默认明亮主题样式 */
+.comments-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: auto;
+    color: #333;
+}
+
+.comment-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    margin: 0  0.8rem !important;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #333;
+    position: relative; /* 确保popover可以正确定位 */
+}
+
+.comment-author {
+    margin: 0;
+    line-height: 1;
+    color: #333;
+}
+
+.comment-date {
+    margin-left: 10px;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.comment-body p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 5px 0 0 0;
+}
+
+.comment {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+/* 暗色模式样式 */
+[data-theme='dark'] .comments-container {
+    background: #222;
+    color: #ccc;
+    box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+}
+
+[data-theme='dark'] .comment {
+    border-bottom: 1px solid #444;
+}
+
+[data-theme='dark'] .comment-header strong {
+    color: #ddd;
+}
+
+[data-theme='dark'] .comment-header span {
+    color: #bbb;
+}
+
+[data-theme='dark'] .comment-body p {
+    color: #ccc;
+}
+
+.popover {
+    position: absolute;
+    top: 100%; /* 位于触发元素的下方 */
+    left: 0;
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none; /* 默认不显示 */
+    z-index: 10;
+    font-size: small;
+}
+
+.popover-content p {
+    margin: 0;
+    padding: 0px 0;
+}
+
+.comment-header:hover .popover {
+    display: block; /* 鼠标悬浮时显示 */
+}
+
+
+/* 暗色模式下的popover样式 */
+[data-theme='dark'] .popover {
+    background-color: #333; /* 暗背景色 */
+    color: #ccc; /* 浅灰色文字，增加可读性 */
+    box-shadow: 0 1px 5px rgba(255,255,255,0.1); /* 浅色阴影 */
+}
+
+[data-theme='dark'] .popover-content p {
+    color: #ccc; /* 调整文字颜色以适应暗背景 */
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 15px;  /* 指示器的宽度 */
+    height: 15px; /* 指示器的高度 */
+    border-radius: 50%; /* 使得指示器为圆形 */
+    margin-left: 5px; /* 在名称和状态指示器之间添加一点间距 */
+    vertical-align: middle; /* 确保与文字垂直居中对齐 */
+    border: 2px solid transparent; /* 默认边框为透明 */
+}
+
+/* 空闲 */
+.status-idle {
+    background-color: #ffffff;
+    border-color: #ccc; /* 在白天模式下提升可见性 */
+}
+
+/* 现场工作 */
+.status-onsite {
+    background-color: #b7c5e4;
+}
+
+/* 线上支持 */
+.status-online {
+    background-color: #a1a1a1;
+}
+
+/* 紧急响应 */
+.status-emergency {
+    background-color: #f7cbb0;
+}
