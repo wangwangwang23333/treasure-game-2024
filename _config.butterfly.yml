@@ -1,2 +1,5 @@
-custom_css:
-  - /css/custom.css
+inject:
+  head:
+    - <link rel="stylesheet" href="/treasure-game-2024/css/custom.css">
+  bottom:
+    - <script src="/treasure-game-2024/js/custom.js"></script>
